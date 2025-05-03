@@ -6,67 +6,320 @@
     <title>宋孟德的个人站</title>
     <style>
         :root {
-            --dark-bg: #0f0c29;
-            --surface: #1A1A1A;
-            --primary: #00FF87;
-            --highlight: #00FF9D;
-            --text: #C0C0C0;
+            --primary: #007bff;
+            --text: #333333;
+            --surface: #ffffff;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         body {
-            background: linear-gradient(45deg, var(--dark-bg), #302b63);
-            min-height: 100vh;
+            background-color: var(--surface);
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            padding: 20px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 20px;
+            color: var(--text);
         }
 
-        .resource-title {
-            background: linear-gradient(45deg, #00FF87, #00FF9D);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 3rem;
-            font-weight: 800;
-            margin: 2rem 0;
-            text-shadow: 0 0 20px rgba(0,255,135,0.5);
+        .page-title {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2rem;
         }
 
-        .app-list {
+        .page-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            margin: 30px 0 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .section-container {
+            margin: 20px 0;
+        }
+
+        .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-            max-width: 800px;
-            padding: 0 20px;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .app-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .app-card-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .app-card-title i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .app-card-desc {
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.9rem;
         }
 
         .app-btn {
-            background: var(--surface);
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            color: white;
-            font-size: 1.1rem;
+            background-color: #f0f2f5;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            color: var(--text);
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
 
         .app-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0,255,135,0.4);
+            background-color: #e6e9ed;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+            color: #666;
+        }
+
+        .footer a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
         }
 
         .qq-group-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .qq-group-item {
+            background: #f0f2f5;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .link-item {
+            margin-bottom: 10px;
+        }
+
+        .link-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .link-url {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .link-url:hover {
+            text-decoration: underline;
+        }
+
+        .unavailable {
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">宋孟德的个人站</h1>
+    <p class="page-description">精选资源导航站，一站式获取各类实用工具与资源</p>
+
+    <div class="section-title">学习工具</div>
+    <div class="app-grid">
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>📚</i> MH-STUDIO学习
+            </div>
+            <div class="app-card-desc">提供微信朋友圈采集备份工具等学习资源</div>
+            <a href="https://mh-studio.cn/" class="link-url" target="_blank">访问网站</a>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>📚</i> 木风软件站
+            </div>
+            <div class="app-card-desc">专注分享最好用的软件</div>
+            <a href="https://www.mfrjz.com/" class="link-url" target="_blank">访问网站</a>
+        </div>
+    </div>
+
+    <div class="section-title">软件下载</div>
+    <div class="app-grid">
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>💻</i> MT论坛
+            </div>
+            <div class="app-card-desc">提供各类软件讨论与下载</div>
+            <a href="https://bbs.binmt.cc/forum.php?mod=guide&view=hot&mobile=2" class="link-url" target="_blank">访问网站</a>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>💻</i> 魔趣网
+            </div>
+            <div class="app-card-desc">免费下载软件与游戏</div>
+            <a href="https://m.mfunz.com/" class="link-url" target="_blank">访问网站</a>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>💻</i> 蓝鲨应用库
+            </div>
+            <div class="app-card-desc">提供丰富的应用下载</div>
+            <a href="https://www.lsapk.com/" class="link-url" target="_blank">访问网站</a>
+        </div>
+    </div>
+
+    <div class="section-title">娱乐游戏</div>
+    <div class="app-grid">
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🎮</i> 异星软件空间
+            </div>
+            <div class="app-card-desc">感受不一样的精彩体验</div>
+            <a href="https://www.yxssp.com/" class="link-url" target="_blank">访问网站</a>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🎮</i> 4399在线玩
+            </div>
+            <div class="app-card-desc">在线玩h5游戏</div>
+            <a href="https://h.4399.com/wap/?301" class="link-url" target="_blank">访问网站</a>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🎮</i> 7k7k小游戏
+            </div>
+            <div class="app-card-desc">提供丰富的小游戏</div>
+            <span class="unavailable">暂时无法访问</span>
+        </div>
+    </div>
+
+    <div class="section-title">资源素材</div>
+    <div class="app-grid">
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🎨</i> MFSC123素材
+            </div>
+            <div class="app-card-desc">提供丰富素材</div>
+            <span class="unavailable">暂时无法访问</span>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🎨</i> 100FONT字体
+            </div>
+            <div class="app-card-desc">提供各类字体下载</div>
+            <span class="unavailable">暂时无法访问</span>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🎨</i> BENSOUND音乐
+            </div>
+            <div class="app-card-desc">提供音乐素材</div>
+            <span class="unavailable">暂时无法访问</span>
+        </div>
+    </div>
+
+    <div class="section-title">实用工具</div>
+    <div class="app-grid">
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🔧</i> 在线视频解析工具
+            </div>
+            <div class="app-card-desc">免费在线视频解析下载</div>
+            <a href="https://www.vlogdownloader.com/" class="link-url" target="_blank">访问网站</a>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🔧</i> Datatool下载
+            </div>
+            <div class="app-card-desc">提供数据工具下载</div>
+            <span class="unavailable">暂时无法访问</span>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🔧</i> Human Benchmark测试
+            </div>
+            <div class="app-card-desc">提供人类智力测试</div>
+            <span class="unavailable">暂时无法访问</span>
+        </div>
+    </div>
+
+    <div class="section-title">漫画阅读</div>
+    <div class="app-grid">
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>📚</i> 包子漫画
+            </div>
+            <div class="app-card-desc">提供漫画阅读</div>
+            <span class="unavailable">暂时无法访问</span>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>📚</i> manhuafree
+            </div>
+            <div class="app-card-desc">提供漫画免费阅读</div>
+            <span class="unavailable">暂时无法访问</span>
+        </div>
+    </div>
+
+    <div class="section-title">友情链接</div>
+    <div class="app-grid">
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🔗</i> 小特应用商店
+            </div>
+            <div class="app-card-desc">提供各类精选应用与工具</div>
+            <a href="https://xiaote.data.blog/" class="link-url" target="_blank">访问网站</a>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🔗</i> 逆光海个人导航网站
+            </div>
+            <div class="app-card-desc">个性化定制的网络导航</div>
+            <a href="http://blacklight.xzin.top/" class="link-url" target="_blank">访问网站</a>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🔗</i> LYCF666.xzin.top
+            </div>
+            <div class="app-card-desc">友情链接</div>
+            <span class="unavailable">暂时无法访问</span>
+        </div>
+        <div class="app-card">
+            <div class="app-card-title">
+                <i>🔗</i> 秘塔AI生成模板
+            </div>
+            <div class="app-card-desc">由秘塔AI生成的网站模板</div>
+            <a href="https://metaso.cn/s/8NTU7cq" class="link-url" target="_blank">访问网站</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 宋孟德的个人站 版权所有</p>
+    </footer>
+</body>
+</html>
             width: 100%;
             max-width: 800px;
         }
