@@ -303,8 +303,8 @@
             <div class="app-card-title">
                 <i>🔗</i> LYCF666.xzin.top
             </div>
-            <div class="app-card-desc">友情链接</div>
-            <span class="unavailable">暂时无法访问</span>
+            <div class="app-card-desc">友链</div>
+            <a href="http://LYCF666.xzin.top" class="link-url" target="_blank">访问网站</a>
         </div>
         <div class="app-card">
             <div class="app-card-title">
@@ -318,29 +318,5 @@
     <footer>
         <p>© 2025 宋孟德的个人站 版权所有</p>
     </footer>
-</body>
-
-    <script>
-        // 独立下载处理函数
-        document.querySelectorAll('.app-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const downloadUrl = btn.getAttribute('data-url');
-                if(downloadUrl) {
-                    // 创建隐藏的a标签进行下载
-                    const link = document.createElement('a');
-                    link.href = downloadUrl;
-                    link.download = ''; // 空值表示使用URL filename
-                    
-                    // 防止重复点击
-                    btn.disabled = true;
-                    setTimeout(() => btn.disabled = false, 3000);
-
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                }
-            });
-        });
-    </script>
 </body>
 </html>
