@@ -6,23 +6,50 @@
     <title>宋孟德资源导航站</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 新增导航系统样式 */
+        :root {
+            --primary: #007bff;
+            --text: #333;
+            --surface: #fff;
+            --shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        [data-theme="dark"] {
+            --primary: #4dabf7;
+            --text: #e9ecef;
+            --surface: #212529;
+            --shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            --nav-bg: rgba(33, 37, 41, 0.95);
+        }
+
+        body {
+            background: var(--surface);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            transition: all 0.3s ease;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* 侧边导航 */
         .side-nav {
             position: fixed;
-            left: 0;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
-            border-radius: 0 15px 15px 0;
-            padding: 20px;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: var(--shadow);
             z-index: 1000;
         }
 
         .nav-link {
-            display: block;
-            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
             margin: 8px 0;
             border-radius: 8px;
             color: var(--text);
@@ -35,7 +62,7 @@
             color: white;
         }
 
-        /* 智能搜索系统 */
+        /* 智能搜索 */
         .search-wrapper {
             position: sticky;
             top: 20px;
@@ -46,11 +73,11 @@
 
         .search-box {
             display: flex;
-            gap: 10px;
-            background: white;
+            background: var(--nav-bg);
             border-radius: 30px;
             padding: 5px 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
         }
 
         .search-input {
@@ -59,108 +86,465 @@
             padding: 15px;
             font-size: 16px;
             background: transparent;
+            color: var(--text);
         }
 
-        .search-type {
+        /* 内容区块 */
+        .page-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 2.5rem;
+        }
+
+        .page-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .app-card {
+            background: var(--nav-bg);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .app-card-title {
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
-        .search-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
+        .app-card-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .link-url {
             color: var(--primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* 主题切换优化 */
+        /* 页脚 */
+        footer {
+            background: var(--nav-bg);
+            padding: 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        /* 主题切换 */
         .theme-switch {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: var(--primary);
             color: white;
             display: grid;
             place-items: center;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow);
         }
     </style>
 </head>
 <body>
-    <!-- 新增智能导航系统 -->
+    <!-- 侧边导航 -->
     <nav class="side-nav">
-        <a href="#实用网站" class="nav-link"><i class="fas fa-globe"></i> 实用网站</a>
-        <a href="#娱乐游戏" class="nav-link"><i class="fas fa-gamepad"></i> 娱乐游戏</a>
-        <a href="#实用工具" class="nav-link"><i class="fas fa-tools"></i> 实用工具</a>
-        <a href="#应用专区" class="nav-link"><i class="fas fa-box-open"></i> 应用专区</a>
+        <a href="#实用网站" class="nav-link">
+            <i class="fas fa-book-open"></i>
+            <span>实用网站</span>
+        </a>
+        <a href="#娱乐游戏" class="nav-link">
+            <i class="fas fa-gamepad"></i>
+            <span>娱乐游戏</span>
+        </a>
+        <a href="#实用工具" class="nav-link">
+            <i class="fas fa-tools"></i>
+            <span>实用工具</span>
+        </a>
+        <a href="#应用专区" class="nav-link">
+            <i class="fas fa-cube"></i>
+            <span>应用专区</span>
+        </a>
     </nav>
 
-    <!-- 智能搜索系统 -->
+    <!-- 智能搜索 -->
     <div class="search-wrapper">
         <form id="searchForm" class="search-box">
             <input type="text" 
                    class="search-input" 
                    placeholder="输入关键词搜索资源..."
                    id="searchInput">
-            <div class="search-type">
-                <button type="button" 
-                        class="search-toggle"
-                        onclick="toggleSearchType()">
-                    <i class="fas fa-sync"></i>
-                </button>
-                <span id="searchTypeLabel">本站搜索</span>
-            </div>
-            <button type="submit" class="app-btn">
+            <button type="button" 
+                    class="link-url"
+                    onclick="toggleSearchType()"
+                    title="切换搜索模式">
+                <i class="fas fa-sync"></i>
+            </button>
+            <button type="submit" class="link-url">
                 <i class="fas fa-search"></i>
             </button>
         </form>
     </div>
 
-    <!-- 原有内容完全保留 -->
-    <div class="section-title" id="实用网站">实用网站</div>
-    <!-- ...保持原有所有内容不变... -->
+    <!-- 页面内容 -->
+    <h1 class="page-title">宋孟德资源导航站</h1>
+    <p class="page-description">一站式获取各类实用工具与资源</p>
+
+    <!-- 实用网站 -->
+    <section id="实用网站">
+        <div class="section-title">📚 实用网站</div>
+        <div class="app-grid">
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>MH-STUDIO学习</span>
+                </div>
+                <p class="app-card-desc">提供微信朋友圈采集备份工具等实用学习资源，适合数据备份需求用户</p>
+                <a href="https://mh-studio.cn/" class="link-url" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    访问网站
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-download"></i>
+                    <span>木风软件站</span>
+                </div>
+                <p class="app-card-desc">专注分享最新最好用的Windows/Android软件，每日更新资源</p>
+                <a href="https://www.mfrjz.com/" class="link-url" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    访问网站
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-comments"></i>
+                    <span>MT论坛</span>
+                </div>
+                <p class="app-card-desc">安卓逆向工程交流社区，提供各类软件修改教程与资源下载</p>
+                <a href="https://bbs.binmt.cc/forum.php?mod=guide&view=hot&mobile=2" class="link-url" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    访问论坛
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-ghost"></i>
+                    <span>魔趣网</span>
+                </div>
+                <p class="app-card-desc">知名安卓ROM下载站，提供各类修改版系统与应用资源</p>
+                <a href="https://m.mfunz.com/" class="link-url" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    访问网站
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-shark"></i>
+                    <span>蓝鲨应用库</span>
+                </div>
+                <p class="app-card-desc">优质安卓应用市场，收录大量实用工具与精品游戏</p>
+                <a href="https://www.lsapk.com/" class="link-url" target="_blank">
+                    <i class="fas fa-download"></i>
+                    立即下载
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 娱乐游戏 -->
+    <section id="娱乐游戏">
+        <div class="section-title">🎮 娱乐游戏</div>
+        <div class="app-grid">
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-gamepad"></i>
+                    <span>异星软件空间</span>
+                </div>
+                <p class="app-card-desc">提供各类精品游戏资源，包含修改版与汉化版本</p>
+                <a href="https://www.yxssp.com/" class="link-url" target="_blank">
+                    <i class="fas fa-download"></i>
+                    获取游戏
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-cube"></i>
+                    <span>4399在线玩</span>
+                </div>
+                <p class="app-card-desc">免下载H5游戏合集，即点即玩经典小游戏</p>
+                <a href="https://h.4399.com/wap/?301" class="link-url" target="_blank">
+                    <i class="fas fa-play-circle"></i>
+                    开始游戏
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实用工具 -->
+    <section id="实用工具">
+        <div class="section-title">🛠️ 实用工具</div>
+        <div class="app-grid">
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-video"></i>
+                    <span>在线视频解析工具</span>
+                </div>
+                <p class="app-card-desc">支持抖音/快手/B站等平台视频解析下载</p>
+                <a href="https://www.vlogdownloader.com/" class="link-url" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    立即使用
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用专区 -->
+    <section id="应用专区">
+        <div class="section-title">📱 应用专区</div>
+
+        <!-- 网络加速器 -->
+        <div class="section-title">🚀 网络加速器专区</div>
+        <div class="app-grid">
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>绿茶VPN</span>
+                </div>
+                <p class="app-card-desc">免费稳定加速器，支持多节点切换与智能分流</p>
+                <a href="https://download.lcvpn.cc/download/lvcha_261_abilvcha.apk" class="link-url" target="_blank">
+                    <i class="fas fa-download"></i>
+                    下载安卓版
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-bolt"></i>
+                    <span>快连VPN</span>
+                </div>
+                <p class="app-card-desc">高速稳定付费VPN，适合长期跨境网络需求</p>
+                <a href="https://letsvpn-1348765136.cos.ap-hongkong.myqcloud.com/Lets.15.0.zip" class="link-url" target="_blank">
+                    <i class="fas fa-download"></i>
+                    下载Windows版
+                </a>
+            </div>
+        </div>
+
+        <!-- 5play破解 -->
+        <div class="section-title">🔓 5play暴力破解专区</div>
+        <div class="app-grid">
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-rocket"></i>
+                    <span>朱诺新起源（简单火箭二）</span>
+                </div>
+                <p class="app-card-desc">5play破解版本，解锁全部DLC内容与无限资源</p>
+                <a href="https://fobetor.s1.5playdisk.com/db58fc8e03ab0253ca823fa2c473565f:2025050921/files/simplerockets-2-v1.2.207-full-t-5play.apk" 
+                   class="link-url" 
+                   target="_blank">
+                    <i class="fas fa-download"></i>
+                    下载破解版
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作业帮专区 -->
+    <section id="作业帮专区">
+        <div class="section-title">📖 作业帮专区</div>
+        <div class="app-grid">
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-store"></i>
+                    <span>小特应用商店</span>
+                </div>
+                <p class="app-card-desc">集成多版本作业帮破解工具与直装包下载</p>
+                <a href="https://xiaote.data.blog/" class="link-url" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    访问商店
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-file-alt"></i>
+                    <span>逆光源文档站</span>
+                </div>
+                <p class="app-card-desc">详细的作业帮破解教程与工具使用指南</p>
+                <a href="http://blacklight.xzin.top/" class="link-url" target="_blank">
+                    <i class="fas fa-book-open"></i>
+                    查看文档
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-tools"></i>
+                    <span>落櫻✿殘風の网站</span>
+                </div>
+                <p class="app-card-desc">提供作业帮刷机工具与系统降级教程</p>
+                <a href="http://LYCF666.xzin.top" class="link-url" target="_blank">
+                    <i class="fas fa-download"></i>
+                    获取工具
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-users"></i>
+                    <span>学习姬交流群</span>
+                </div>
+                <p class="app-card-desc">QQ群实时交流作业帮破解经验与资源分享</p>
+                <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=r0S_nU25lOD2D4PqQOgC9RwivoPaaDNu&authKey=NwOX%2FsZIncIrx0Qm08i%2Bg%2BLrdkWcENrlGhutLBSJZnLRRmMljH8Od7%2B9Glc9j95y&noverify=0&group_code=985469267" 
+                   class="link-url" 
+                   target="_blank">
+                    <i class="fab fa-qq"></i>
+                    加入QQ群
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-archive"></i>
+                    <span>旧软件包安装程序</span>
+                </div>
+                <p class="app-card-desc">用于触发作业帮3.7.0以下版本的降级安装漏洞</p>
+                <a href="https://c1026.dmpdmp.com/3388cabcd31fb0f77262e713479b6c4d/681e0555/2025/02/23/de493e55d36297700aaa635baf9e1663.apk?fn=[%E6%97%A7]%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F_12(3.6.0)[xiaoteapp.data.bloh%E6%8F%90%E4%BE%9B%E5%BA%94%E7%94%A8].apk" 
+                   class="link-url" 
+                   target="_blank">
+                    <i class="fas fa-download"></i>
+                    下载历史版本
+                </a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-card-title">
+                    <i class="fas fa-cog"></i>
+                    <span>旧版设置程序</span>
+                </div>
+                <p class="app-card-desc">开启USB安装权限的必要组件（仅限3.7.0以下版本）</p>
+                <a href="https://123-184-152-20.pd1.cjjd19.com:30443/download-cdn.cjjd19.com/123-440/6300de80/1839190395-0/6300de80c914da2cca99f2eb005c95b8/c-m72?v=5&t=1746882537&s=17468825375991a0560560d31ca87c106f128d686f&r=1RGEG5&bzc=2&bzs=313833393139303339353a34363437383830313a35303031353136333a30&filename=[%E6%97%A7]%E8%AE%BE%E7%BD%AE_12(3.2.0)[xiaoteapp.data.bloh%E6%8F%90%E4%BE%9B%E5%BA%94%E7%94%A8].apk&x-mf-biz-cid=42ab3722-9428-40ca-ae92-653ee57b383f-cb8c2b&auto_redirect=0&cache_type=1&xmfcid=535c491e-bf2b-4e14-a10f-b5f4b4f285ed-0-50111d3b1" 
+                   class="link-url" 
+                   target="_blank">
+                    <i class="fas fa-download"></i>
+                    获取设置程序
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/jxsmdcn/BB">
+                <i class="fab fa-github"></i>
+                GitHub仓库
+            </a>
+            <a href="https://b23.tv/4Fpebrc">
+                <i class="fab fa-bilibili"></i>
+                B站主页
+            </a>
+        </div>
+        <p>© 2025 宋孟德的个人站 | 保留所有权利</p>
+    </footer>
+
+    <!-- 主题切换 -->
+    <button class="theme-switch" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <script>
-        // 智能搜索功能
-        let isLocalSearch = true;
+        // 搜索功能
+        let searchMode = 'local';
         
         function toggleSearchType() {
-            isLocalSearch = !isLocalSearch;
-            document.getElementById('searchTypeLabel').textContent = 
-                isLocalSearch ? '本站搜索' : '必应搜索';
+            searchMode = searchMode === 'local' ? 'bing' : 'local';
+            document.getElementById('searchInput').placeholder = 
+                searchMode === 'local' ? '输入关键词搜索资源...' : '必应全网搜索...';
         }
 
         document.getElementById('searchForm').onsubmit = function(e) {
             e.preventDefault();
-            const query = document.getElementById('searchInput').value;
+            const query = document.getElementById('searchInput').value.trim();
             
-            if(isLocalSearch) {
-                // 本地搜索功能
+            if(searchMode === 'local') {
                 document.querySelectorAll('.app-card').forEach(card => {
                     const text = card.textContent.toLowerCase();
                     card.style.display = text.includes(query.toLowerCase()) ? 'block' : 'none';
                 });
             } else {
-                // 跳转必应搜索
-                window.open(`https://cn.bing.com/search?q=${encodeURIComponent(query)}+site:${window.location.hostname}`);
+                window.open(`https://cn.bing.com/search?q=site:${location.hostname}+${encodeURIComponent(query)}`);
             }
         }
 
-        // 主题切换功能
-        function toggleTheme() {
+        // 主题切换
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-theme');
             localStorage.setItem('theme', 
                 document.body.classList.contains('dark-theme') ? 'dark' : 'light');
-        }
+            themeToggle.innerHTML = document.body.classList.contains('dark-theme') 
+                ? '<i class="fas fa-sun"></i>' 
+                : '<i class="fas fa-moon"></i>';
+        });
 
         // 初始化主题
         if(localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
     </script>
 </body>
